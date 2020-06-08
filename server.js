@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 const colors = require('colors')
 
 dotenv.config({path:'./config/config.env'})
+
 const transactions = require('./routes/transaction')
 const app = express()
 
