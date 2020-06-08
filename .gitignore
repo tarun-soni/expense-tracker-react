@@ -24,4 +24,3 @@ yarn-error.log*
 client/node_modules/
 config/config.env
 config/config.env
-config/config

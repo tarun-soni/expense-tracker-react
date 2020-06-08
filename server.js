@@ -1,9 +1,11 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const colors = require('colors')
-
+const connectDB = require('./config/db');
 dotenv.config({path:'./config/config.env'})
 
+
+connectDB()
 const transactions = require('./routes/transaction')
 const app = express()
 
