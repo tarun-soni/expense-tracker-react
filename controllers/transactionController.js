@@ -1,22 +1,37 @@
-//@desc get all transactions
-//@route GET api/v1/transactions
-//@access  PUBLIC 
-exports.getTransactions = (req,res,next) => {
-    res.send('GET transactions');
-}
+const Transaction = require('../models/Transaction');
 
+// @desc    Get all transactions
+// @route   GET /api/v1/transactions
+// @access  Public
+exports.getTransactions = async (req, res, next) => {
+    try {
+        const transactions = await Transaction.find();
+
+        //status 200 is all OK
+        return res.status(200).json({
+            success: true,
+            count: transactions.length,
+            data: transactions
+        });
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            error: 'Server Error'
+        });
+    }
+}
 
 //@desc ADD all transactions
 //@route POST api/v1/transactions
 //@access  PUBLIC 
-exports.addTransaction = (req,res,next) => {
-    res.send('POST transactions');
+exports.addTransaction = async (req, res, next) => {
+    // res.send('POST transactions');
 }
 
 
 //@desc DELETE all transactions
 //@route POST api/v1/transactions/:id
 //@access  PUBLIC 
-exports.deleteTransaction = (req,res,next) => {
-    res.send('DELETE transactions');
+exports.deleteTransaction = async (req, res, next) => {
+    // res.send('DELETE transactions');
 }
