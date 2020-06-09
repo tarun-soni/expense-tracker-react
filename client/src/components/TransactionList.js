@@ -1,10 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext , useEffect} from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import { Transaction } from './Transaction';
 export const TransactionList = () => {
-    const { transactions } = useContext(GlobalContext)
+    const { transactions,getTransactions } = useContext(GlobalContext)
   
-console.log('transactions :>> ', transactions);
+
+    useEffect(() => {
+        getTransactions();
+       //eslint--disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    
+    console.log('transactions :>> ', transactions);
     return (
         <>
             <h3>History</h3>
