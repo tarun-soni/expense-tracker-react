@@ -5,7 +5,7 @@ import axios from 'axios';
 const initialState = {
     transactions: [],
     error: null,
-    loading:true
+    loading: true
 }
 
 // Create context
@@ -34,11 +34,24 @@ export const GlobalProvider = ({ children }) => {
 
 
     //Actions
-    function deleteTransaction(id) {
-        dispatch({
-            type: 'DELETE_TRANSACTION',
-            payload: id
-        })
+    async function deleteTransaction(id) {
+
+        try {
+            await axios.delete(`/api/v1/transactions/${id}`)
+
+            dispatch({
+                type: 'DELETE_TRANSACTION',
+                payload: id
+            })
+
+        } catch (err) {
+            console.log('error while :>> deletion', err);
+            dispatch({
+                type: 'TRANSACTION_ERROR',
+                payload: err.response.data.error
+              });
+        }
+
     }
     function addTransaction(transaction) {
         dispatch({
@@ -49,8 +62,8 @@ export const GlobalProvider = ({ children }) => {
     return (
         <GlobalContext.Provider value={{
             transactions: state.transactions,
-            error:state.error,
-            loading:state.loading,
+            error: state.error,
+            loading: state.loading,
             getTransactions,
             deleteTransaction,
             addTransaction
