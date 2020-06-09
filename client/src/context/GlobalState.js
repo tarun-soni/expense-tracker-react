@@ -24,10 +24,11 @@ export const GlobalProvider = ({ children }) => {
                 type: 'GET_TRANSACTIONS',
                 payload: res.data.data
             })
-        } catch (error) {
+        } catch (err) {
+            console.log('err', err);
             dispatch({
                 type: 'TRANSACTION_ERROR',
-                payload: error.res.data.error
+                payload: err.res.data.error
             })
         }
     }
